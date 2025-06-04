@@ -23,30 +23,7 @@ Git - Controle de versão
 
 Chrome DevTools - Debugging e análise
 
-🌐 Estrutura do Projeto
-datatech-site/
-│
-├── index.html          # Homepage principal
-├── services/           # Páginas de serviços
-│   ├── cloud.html
-│   ├── data.html
-│   └── devops.html
-├── contact.html        # Formulário de contato
-├── about.html          # Sobre a empresa
-│
-├── assets/
-│   ├── css/
-│   │   ├── main.css    # Estilos principais
-│   │   └── responsive.css # Media queries
-│   │
-│   ├── js/
-│   │   ├── main.js     # Funcionalidades
-│   │   └── form.js     # Validação de formulário
-│   │
-│   ├── images/         # Otimizadas para web
-│   └── fonts/          # Fontes customizadas
-│
-└── README.md           # Este documento
+
 ✨ Destaques do Projeto
 Design Responsivo
 
