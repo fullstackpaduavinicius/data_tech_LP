@@ -23,6 +23,7 @@
     "react-icons": "^4.12.0",
     "react-intersection-observer": "^9.16.0",
     "react-router-dom": "^6.30.1",
+    "react-scroll": "^1.9.3",
     "react-slick": "^0.29.0",
     "slick-carousel": "^1.8.1",
     "yup": "^1.6.1"

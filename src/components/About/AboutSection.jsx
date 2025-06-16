@@ -46,7 +46,7 @@ const AboutSection = () => {
   ];
 
   return (
-    <AboutContainer id="about">
+    <AboutContainer id="services"> {/* ID alterado para #services */}
       <Grid container justifyContent="center" spacing={6}>
         {/* Título e Introdução */}
         <Grid item xs={12} sx={{ textAlign: "center" }}>

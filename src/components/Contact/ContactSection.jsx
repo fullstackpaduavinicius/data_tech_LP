@@ -18,14 +18,14 @@ import { useForm, Controller } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 
-// Schema de validação com Yup
+// Schema de validação
 const schema = yup.object().shape({
   name: yup.string().required("Nome é obrigatório"),
   email: yup.string().email("E-mail inválido").required("E-mail é obrigatório"),
-  message: yup.string().required("Mensagem é obrigatória"),
+  message: yup.string().required("Por favor, descreva a necessidade da sua empresa"),
 });
 
-// Estilos personalizados com Emotion
+// Estilos personalizados
 const ContactContainer = styled(Box)(({ theme }) => ({
   background: "linear-gradient(135deg, #f5f7fa 0%, #e4e8f0 100%)",
   padding: theme.spacing(10, 2),
@@ -51,9 +51,18 @@ const ContactSection = () => {
     resolver: yupResolver(schema),
   });
 
-  const onSubmit = (data) => {
-    console.log("Formulário enviado:", data);
-    // Aqui você pode integrar com API (ex: axios) ou enviar para o WhatsApp
+  const sendToWhatsApp = (formData) => {
+    const message = `*Nova mensagem do site Datatech Consultoria*\n\n*Nome:* ${formData.name}\n*E-mail:* ${formData.email}\n\n*Mensagem:*\n${formData.message}\n\n*Estou interessado em soluções de controladoria e análise de dados!*`;
+    
+    // Cria um link temporário e clica programaticamente (funciona em todos os navegadores)
+    const link = document.createElement('a');
+    link.href = `https://wa.me/5579998807035?text=${encodeURIComponent(message)}`;
+    link.target = '_blank';
+    link.rel = 'noopener noreferrer';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    
     setOpenSnackbar(true);
     reset();
   };
@@ -75,13 +84,13 @@ const ContactSection = () => {
       icon: <FiMapPin size={24} color={theme.palette.primary.main} />,
       title: "Localização",
       value: "Aracaju, SE",
-      href: "#",
+      href: "https://maps.google.com/?q=Aracaju,SE",
     },
     {
       icon: <FiLinkedin size={24} color={theme.palette.primary.main} />,
       title: "LinkedIn",
       value: "linkedin.com/in/suan-datatech",
-      href: "#",
+      href: "https://linkedin.com/in/suan-datatech",
     },
   ];
 
@@ -95,13 +104,6 @@ const ContactSection = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
           >
-            <Typography
-              variant="h6"
-              color="primary.main"
-              gutterBottom
-            >
-              
-            </Typography>
             <Typography
               variant={isMobile ? "h4" : "h3"}
               fontWeight={700}
@@ -130,7 +132,7 @@ const ContactSection = () => {
             <Typography variant="h5" fontWeight={600} gutterBottom>
               Envie uma mensagem
             </Typography>
-            <form onSubmit={handleSubmit(onSubmit)}>
+            <form onSubmit={handleSubmit(sendToWhatsApp)}>
               <Grid container spacing={3}>
                 <Grid item xs={12}>
                   <Controller
@@ -174,13 +176,14 @@ const ContactSection = () => {
                     render={({ field }) => (
                       <TextField
                         {...field}
-                        label="Mensagem"
+                        label="Descreva a necessidade da sua empresa"
                         variant="outlined"
                         fullWidth
                         multiline
                         rows={4}
                         error={!!errors.message}
                         helperText={errors.message?.message}
+                        placeholder="Ex.: Preciso de uma controladoria financeira. Gestão de custos, relatórios e planejamento estratégico..."
                       />
                     )}
                   />
@@ -195,8 +198,9 @@ const ContactSection = () => {
                     fullWidth
                     component={motion.div}
                     whileHover={{ scale: 1.02 }}
+                    whileTap={{ scale: 0.98 }}
                   >
-                    Enviar Mensagem
+                    Enviar Mensagem pelo WhatsApp
                   </Button>
                 </Grid>
               </Grid>
@@ -225,6 +229,7 @@ const ContactSection = () => {
                     <IconButton
                       href={method.href}
                       target="_blank"
+                      rel="noopener noreferrer"
                       sx={{ background: "rgba(100, 244, 172, 0.1)" }}
                     >
                       {method.icon}
@@ -238,6 +243,8 @@ const ContactSection = () => {
                         fontWeight={500}
                         component="a"
                         href={method.href}
+                        target="_blank"
+                        rel="noopener noreferrer"
                         sx={{
                           textDecoration: "none",
                           color: "inherit",
@@ -263,7 +270,7 @@ const ContactSection = () => {
         anchorOrigin={{ vertical: "top", horizontal: "right" }}
       >
         <Alert severity="success" sx={{ width: "100%" }}>
-          Mensagem enviada com sucesso! Entraremos em contato em breve.
+          Redirecionando para o WhatsApp... Complete o envio da mensagem lá.
         </Alert>
       </Snackbar>
     </ContactContainer>

@@ -41,6 +41,14 @@ const HeroSection = () => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
 
+  // Função para redirecionar para o WhatsApp
+  const handleWhatsAppClick = () => {
+    const phoneNumber = "5579998807035";
+    const message = "Olá, gostaria de falar com um especialista da Datatech.";
+    const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
+    window.open(whatsappUrl, "_blank");
+  };
+
   // Animations
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -117,6 +125,7 @@ const HeroSection = () => {
               endIcon={<FiArrowRight />}
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
+              onClick={handleWhatsAppClick}
             >
               Fale com o especialista
             </StyledButton>

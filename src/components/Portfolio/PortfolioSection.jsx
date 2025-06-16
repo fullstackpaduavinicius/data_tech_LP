@@ -9,6 +9,7 @@ const VideoSection = () => {
   return (
     <Box
       component="section"
+      id="about" // ID adicionado para linkagem com o Header
       sx={{
         py: 10,
         bgcolor: theme.palette.mode === 'dark' ? theme.palette.background.default : theme.palette.grey[50],
